@@ -29,6 +29,11 @@ public class Practice11PieChartView extends View {
 
     Paint paintLine;//画线
 
+
+    RectF rectfCommon;//不移动的部分
+
+    RectF rectfMove;//移动的部分
+
     public Practice11PieChartView(Context context) {
         super(context);
         init();
@@ -63,6 +68,10 @@ public class Practice11PieChartView extends View {
         paintText = new Paint(Paint.ANTI_ALIAS_FLAG);
         paintText.setTextSize(30);
         paintText.setColor(Color.LTGRAY);
+
+        rectfCommon = new RectF(-300, -300, 300, 300);
+        rectfMove = new RectF(-350, -350, 250, 250);
+
     }
 
 
@@ -73,9 +82,6 @@ public class Practice11PieChartView extends View {
         int height = getHeight();
 
         canvas.translate(width / 2, height / 2);
-
-        RectF f = new RectF(-300, -300, 300, 300);
-        RectF f2 = new RectF(-350, -350, 250, 250);
 
         float startAngle = 0;
         float sweepAngle = 0;
@@ -93,9 +99,9 @@ public class Practice11PieChartView extends View {
 
 //            第五个饼会离开一段距离
             if (i == 5) {
-                canvas.drawArc(f2, startAngle + 1, sweepAngle - 1, true, paintPie);
+                canvas.drawArc(rectfMove, startAngle + 1, sweepAngle - 1, true, paintPie);
             } else {
-                canvas.drawArc(f, startAngle + 1, sweepAngle - 1, true, paintPie);
+                canvas.drawArc(rectfCommon, startAngle + 1, sweepAngle - 1, true, paintPie);
             }
 
 //画斜线

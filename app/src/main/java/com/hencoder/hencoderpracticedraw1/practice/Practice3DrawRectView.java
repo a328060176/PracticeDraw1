@@ -11,34 +11,48 @@ import android.view.View;
 
 public class Practice3DrawRectView extends View {
 
+    private int width;//view宽
+
+    private int height;//view高
+
+
+    private Paint paint;
+
+
     public Practice3DrawRectView(Context context) {
         super(context);
+        init();
     }
 
     public Practice3DrawRectView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        init();
     }
 
     public Practice3DrawRectView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        init();
+    }
+
+    private void init() {
+        paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        int width = getWidth();
-        int height = getHeight();
+        width = getWidth();
+        height = getHeight();
 
 //        练习内容：使用 canvas.drawRect() 方法画矩形
 
         canvas.save();
-        Paint p = new Paint(Paint.ANTI_ALIAS_FLAG);
-        p.setColor(Color.BLACK);
+        paint.setColor(Color.BLACK);
         canvas.translate(width / 2, height / 2);
         RectF r = new RectF(-300, -300, 300, 300);
-        canvas.drawRect(r, p);
-
+        canvas.drawRect(r, paint);
         canvas.restore();
     }
 }

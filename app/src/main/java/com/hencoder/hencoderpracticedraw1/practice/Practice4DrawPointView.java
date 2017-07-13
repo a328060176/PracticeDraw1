@@ -10,16 +10,35 @@ import android.view.View;
 
 public class Practice4DrawPointView extends View {
 
+    private int width;//view宽
+
+    private int height;//view高
+
+
+    private int offsetWidth;//
+
+    private int offsetHeight;//
+
+    private Paint paint;
+
     public Practice4DrawPointView(Context context) {
         super(context);
+        init();
     }
 
     public Practice4DrawPointView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        init();
     }
 
     public Practice4DrawPointView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        init();
+    }
+
+    private void init() {
+        paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+
     }
 
     @Override
@@ -30,12 +49,11 @@ public class Practice4DrawPointView extends View {
 //        一个圆点，一个方点
 //        圆点和方点的切换使用 paintPie.setStrokeCap(cap)：`ROUND` 是圆点，`BUTT` 或 `SQUARE` 是方点
 
-        int width = getWidth();
-        int height = getHeight();
-        int offsetWidth = width / 4;
-        int offsetHeight = height / 2;
+        width = getWidth();
+        height = getHeight();
+        offsetWidth = width / 4;
+        offsetHeight = height / 2;
 
-        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setColor(Color.BLACK);
         paint.setStrokeWidth(100);
 

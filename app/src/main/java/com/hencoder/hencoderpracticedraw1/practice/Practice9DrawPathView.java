@@ -11,16 +11,37 @@ import android.view.View;
 
 public class Practice9DrawPathView extends View {
 
+    private int width;//view宽
+
+    private int height;//view高
+
+    private Path pathLeft;//左心
+
+    private Path pathRight;//有心
+
+    private Paint paint;
+
     public Practice9DrawPathView(Context context) {
         super(context);
+        init();
     }
 
     public Practice9DrawPathView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        init();
     }
 
     public Practice9DrawPathView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        init();
+    }
+
+    private void init() {
+        paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+
+        pathRight= new Path();
+        pathLeft = new Path();
+
     }
 
     @Override
@@ -29,30 +50,27 @@ public class Practice9DrawPathView extends View {
 
 //        练习内容：使用 canvas.drawPath() 方法画心形
 
-        int width = getWidth();
-        int height = getHeight();
+        width = getWidth();
+        height = getHeight();
 
         int heartWidth = width / 3;
 
-        Path path2 = new Path();
-        Path path = new Path();
 
-        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setStyle(Paint.Style.FILL);
 
         canvas.save();
 
         canvas.translate(width / 2, height / 2);
         RectF f1 = new RectF(-heartWidth / 2, -heartWidth / 4, 0, heartWidth / 4);
-        path.arcTo(f1, 0, -220);
-        path.lineTo(0, heartWidth * 0.65f);
-        canvas.drawPath(path, paint);
+        pathLeft.arcTo(f1, 0, -220);
+        pathLeft.lineTo(0, heartWidth * 0.65f);
+        canvas.drawPath(pathLeft, paint);
 
 
         RectF f2 = new RectF(0, -heartWidth / 4, heartWidth / 2, heartWidth / 4);
-        path2.arcTo(f2, 180, 220);
-        path2.lineTo(0, heartWidth * 0.65f);
-        canvas.drawPath(path2, paint);
+        pathRight.arcTo(f2, 180, 220);
+        pathRight.lineTo(0, heartWidth * 0.65f);
+        canvas.drawPath(pathRight, paint);
 
         canvas.restore();
 

@@ -10,16 +10,31 @@ import android.view.View;
 
 public class Practice5DrawOvalView extends View {
 
+    private int width;//view宽
+
+    private int height;//view高
+
+
+    private Paint paint;
+
     public Practice5DrawOvalView(Context context) {
         super(context);
+        init();
     }
 
     public Practice5DrawOvalView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        init();
     }
 
     public Practice5DrawOvalView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        init();
+    }
+
+    private void init() {
+        paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+
     }
 
     @Override
@@ -28,9 +43,8 @@ public class Practice5DrawOvalView extends View {
 
 //        练习内容：使用 canvas.drawOval() 方法画椭圆
 
-        int width = getWidth();
-        int height = getHeight();
-        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        width = getWidth();
+        height = getHeight();
         paint.setStyle(Paint.Style.FILL);
 
         canvas.save();
