@@ -2,11 +2,18 @@ package com.hencoder.hencoderpracticedraw1.practice;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Rect;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class Practice10HistogramView extends View {
+    private String[] s = {"Froyo", "GB", "ICS", "JB", "KitKat", "L", "M"};
 
     public Practice10HistogramView(Context context) {
         super(context);
@@ -25,6 +32,37 @@ public class Practice10HistogramView extends View {
         super.onDraw(canvas);
 
 //        综合练习
-//        练习内容：使用各种 Canvas.drawXXX() 方法画直方图
+//        练习内容：使用各种 Canvas.dawXXX() 方法画直方图
+
+        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paint.setColor(Color.WHITE);
+        paint.setStrokeWidth(10);
+        canvas.drawLine(200, 800, 1200, 800, paint);
+        canvas.drawLine(200, 800, 200, 100, paint);
+
+        List<String> strings = Arrays.asList(s);
+
+        int offset = 270;//开始画第一个字体和柱状图的位置
+        int width = 140;//柱状图的间距
+        int textY = 840;//画text的纵坐标
+        int lineY = 800;//画text的纵坐标
+
+
+        for (int i = 0; i < strings.size(); i++) {
+            //画柱状图
+            paint.setColor(Color.parseColor("#8800FF00"));
+            paint.setStrokeWidth(120);
+            canvas.drawLine(offset + width * i, lineY, offset + width * i, 700 - (100 * i), paint);
+
+            //画字体
+            paint.setTextSize(30);
+            paint.setColor(Color.WHITE);
+            String text = strings.get(i);
+            Rect mBound = new Rect();
+            paint.getTextBounds(text, 0, text.length(), mBound);
+            //字体的中间点和柱状图的中间点一直
+            canvas.drawText(text, offset + width * i - mBound.width() / 2, textY, paint);
+
+        }
     }
 }
